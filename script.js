@@ -1,4 +1,5 @@
 const celdas = document.getElementsByTagName('td');
+const filas = document.getElementsByTagName('tr');
 const flechas = document.getElementsByClassName('flechas');
 var posicionBueno;
 
@@ -10,9 +11,9 @@ window.onload = ()=>{
     // mover();
     
     flechas[0].addEventListener('click', moverArriba)
-    flechas[1].addEventListener('click', moverDerecha)
+    flechas[3].addEventListener('click', moverDerecha)
     flechas[2].addEventListener('click', moverAbajo)
-    flechas[3].addEventListener('click', moverIzquierda)
+    flechas[1].addEventListener('click', moverIzquierda)
 
    
 }
@@ -45,20 +46,48 @@ function comienzoJuego() {
 }
 
 function moverDerecha(){
-    flechas[1].onclick=function(){
 
-        var posicionActBueno = posicionBueno+1;
-        celdas[posicionActBueno].textContent = 'Robert'
+    if((posicionBueno+1)%filas.length!=0){  //Solo se mueve si Robert no esta en una posicion que sea igual a un multiplo de la longitud de una fila (multiplos de 8)
+        
+        celdas[posicionBueno].textContent = '-';
+        
+        posicionBueno = posicionBueno + 1;
+        celdas[posicionBueno].textContent = 'Robert';
     }
-    console.log('derecha')
 }
 
 function moverArriba() {
-    // console.log('arriba')
+
+    if(posicionBueno>filas.length){ //Solo se mueve si la posicion de Jaime es mayor a la longgitud de una fila, por lo que no estará en la primera fila
+        //Empezara a moverse a partir de la posicion '8', es decir, a partir de la segunda fila
+
+        celdas[posicionBueno].textContent = '-';
+
+        posicionBueno = posicionBueno - filas.length;
+        celdas[posicionBueno].textContent = 'Robert';
+    }
+
 }
 function moverAbajo() {
-    // console.log('abajo')
+    
+    if(posicionBueno<(celdas.length-filas.length)){ //Para la ultima fila restas el numero de celdas totales con la longitud de una fila
+        //De manera que solo se mueve si Jaime no se encuentra en la ultima fila
+        
+    celdas[posicionBueno].textContent = '-';
+
+    posicionBueno = posicionBueno + filas.length;
+    celdas[posicionBueno].textContent = 'Robert';
+    }
+
 }
+
 function moverIzquierda() {
-    // console.log('izquierda')
+
+    if((posicionBueno)%filas.length!=0){  //Solo se mueve si Robert no esta en una posicion que sea igual a un (multiplo de la longitud de una fila + 1), que es la posicion siguiente a la ultiuma de la fila 
+        
+        celdas[posicionBueno].textContent = '-';
+        
+        posicionBueno = posicionBueno - 1;
+        celdas[posicionBueno].textContent = 'Robert';
+    }
 }
