@@ -5,6 +5,9 @@ var posicionBueno;
 var posicionMalo;
 var examenes;
 var salida;
+var filaBueno=0; //Fila en la que se encuentra el bueno
+var filaMalo=-1; //Fila en la que se encuentra el malo
+var cont=0; //contador para saber en que fila estoy (se utiliza en el metodo comprobarFilaMalo())
 
 
 window.onload = ()=>{    
@@ -39,6 +42,8 @@ function comienzoJuego() {
     for (let i = 0; i < flechas.length; i++) {
         flechas[i].style.visibility = 'visible';
     }
+
+    comprobarFilaMalo(); 
     
 
 }
@@ -69,9 +74,12 @@ function moverArriba() {
         posicionBueno = posicionBueno - filas.length;
         celdas[posicionBueno].textContent = 'Robert';
     }
+
+    filaBueno--;
     apareceSalida();
     win();
     moverMalo();
+
 }
 
 function moverAbajo() {
@@ -84,6 +92,8 @@ function moverAbajo() {
     posicionBueno = posicionBueno + filas.length;
     celdas[posicionBueno].textContent = 'Robert';
     }
+
+    filaBueno++;
     apareceSalida();
     win();
     moverMalo();
@@ -126,11 +136,13 @@ function win(){
 function moverMalo(){
     if(posicionBueno>posicionMalo){
         //abajo
-        if(posicionBueno-posicionMalo<filas.length){
+        if(filaBueno>filaMalo){
             celdas[posicionMalo].textContent = '-';
 
             posicionMalo = posicionMalo + filas.length;
             celdas[posicionMalo].textContent = 'Jaime';
+
+            filaMalo++;
         }
         //derecha
         else{
@@ -143,11 +155,13 @@ function moverMalo(){
     }
     else if(posicionMalo>posicionBueno){
         //arriba
-        if(posicionMalo-posicionBueno>filas.length){
+        if(filaBueno<filaMalo){
             celdas[posicionMalo].textContent = '-';
 
             posicionMalo = posicionMalo - filas.length;
             celdas[posicionMalo].textContent = 'Jaime';
+
+            filaMalo--;
         }
         //izquierda
         else{
@@ -157,12 +171,24 @@ function moverMalo(){
             celdas[posicionMalo].textContent = 'Jaime';
         }
     }
-    else if(posicionBueno == posicionMalo){
+    else{
         alert("Has perdido");
         location.reload();
     }
-    
+
     console.log("bueno "+posicionBueno);
     console.log("malo "+posicionMalo);
     
 }
+
+function comprobarFilaMalo(){
+    
+    while(posicionMalo>cont){
+        cont=cont+filas.length;
+        filaMalo++;
+    }
+    console.log(filaMalo);
+}
+
+
+
