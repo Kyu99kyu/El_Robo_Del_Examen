@@ -19,6 +19,9 @@ window.onload = ()=>{
     flechas[3].addEventListener('click', moverDerecha);
     flechas[2].addEventListener('click', moverAbajo);
     flechas[1].addEventListener('click', moverIzquierda);
+
+    window.onkeyup=movimientoTeclas; //Para moverlo con las teclas tambien flama
+
     
 }
 
@@ -188,6 +191,25 @@ function comprobarFilaMalo(){
         filaMalo++;
     }
     console.log(filaMalo);
+}
+
+function movimientoTeclas(event){
+	if(event.keyCode == '39'){//derecha
+		moverDerecha();
+	}
+
+	if(event.keyCode == '37'){//Izquierda
+		moverIzquierda();
+	}
+	
+	if(event.keyCode == '38'){//arriba
+		moverArriba();
+	}
+
+	if(event.keyCode == '40'){//abajo
+		moverAbajo();
+	}
+
 }
 
 
