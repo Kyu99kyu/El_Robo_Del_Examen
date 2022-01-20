@@ -135,6 +135,7 @@ function win(){
     }
 }
 
+
 //Prueba del movimiento del malo
 function moverMalo(){
     if(posicionBueno>posicionMalo){
@@ -174,8 +175,10 @@ function moverMalo(){
             celdas[posicionMalo].textContent = 'Jaime';
         }
     }
-    else{
-        alert("Has perdido");
+    
+
+    if(posicionMalo==posicionBueno){
+        alert("Has perdio makina");
         location.reload();
     }
 
