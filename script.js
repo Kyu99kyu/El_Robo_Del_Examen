@@ -3,11 +3,13 @@ const filas = document.getElementsByTagName('tr');
 const flechas = document.getElementsByClassName('flechas');
 var posicionBueno;
 var posicionMalo;
+var nceldas;
 var examenes;
 var salida;
 var filaBueno=0; //Fila en la que se encuentra el bueno
 var filaMalo=-1; //Fila en la que se encuentra el malo
 var cont=0; //contador para saber en que fila estoy (se utiliza en el metodo comprobarFilaMalo())
+var pared;
 
 
 window.onload = ()=>{    
@@ -27,7 +29,7 @@ window.onload = ()=>{
 
 
 function comienzoJuego() {    
-    let nceldas=celdas.length; //Numero de celdas
+    nceldas=celdas.length; //Numero de celdas
     posicionMalo = Math.floor(Math.random() * (nceldas-1)) + 1; //Posicion del malo
      
     posicionBueno = 0; //Posicion del bueno
@@ -36,7 +38,8 @@ function comienzoJuego() {
 
     //Por si la posicion del malo es la misma que la del bueno
     do {
-        examenes = Math.floor(Math.random() * (nceldas-1)) + 1;    
+        examenes = Math.floor(Math.random() * (nceldas-1)) + 1; 
+        
     } while ((posicionMalo == examenes)&& examenes == (celdas.length-1));
     
     celdas[examenes].textContent ='Examen';
@@ -46,8 +49,14 @@ function comienzoJuego() {
         flechas[i].style.visibility = 'visible';
     }
 
+    generarBloques(); 
     comprobarFilaMalo(); 
-    console.log("filabueno: " +filaBueno)
+
+    //console.log("filabueno: " +filaBueno)
+    //console.log("filamalo: " +filaMalo)
+
+    console.log("Posicion malo: "+posicionMalo)
+    console.log("Posicion examen: "+examenes)
     
     
 
@@ -221,11 +230,11 @@ function moverMalo(){
 
 function comprobarFilaMalo(){
     
-    while(posicionMalo>cont){
+    while(posicionMalo>=cont){
         cont=cont+filas.length;
         filaMalo++;
     }
-    console.log(filaMalo);
+    
 }
 
 function movimientoTeclas(event){
@@ -245,6 +254,23 @@ function movimientoTeclas(event){
 		moverAbajo();
 	}
 
+}
+
+function generarBloques(){
+
+    for(let i=0;i<16;i++){
+        pared = Math.floor(Math.random() * (nceldas-2)) + 1;
+
+        if(posicionMalo!=pared && examenes!=pared){
+            celdas[pared].style.backgroundColor="black";
+            celdas[pared].id="pared";
+
+        }
+        else{
+            i--
+        }
+        
+    }  
 }
 
 
