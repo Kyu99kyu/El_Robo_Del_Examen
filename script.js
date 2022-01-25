@@ -47,6 +47,8 @@ function comienzoJuego() {
     }
 
     comprobarFilaMalo(); 
+    console.log("filabueno: " +filaBueno)
+    
     
 
 }
@@ -59,11 +61,17 @@ function moverDerecha(){
         
         posicionBueno = posicionBueno + 1;
         celdas[posicionBueno].textContent = 'Robert';
+
+        apareceSalida();
+        win();
+        setTimeout(() => moverMalo(), 300);
     }
 
-    apareceSalida();
-    win();
-    moverMalo();
+
+
+    console.log("filabueno: " +filaBueno)
+    
+    
 
 }
 
@@ -76,12 +84,17 @@ function moverArriba() {
 
         posicionBueno = posicionBueno - filas.length;
         celdas[posicionBueno].textContent = 'Robert';
-    }
 
-    filaBueno--;
-    apareceSalida();
-    win();
-    moverMalo();
+        filaBueno--;
+
+        apareceSalida();
+        win();
+        setTimeout(() => moverMalo(), 300);
+    }
+    
+
+    console.log("filabueno: " +filaBueno)
+    
 
 }
 
@@ -90,16 +103,21 @@ function moverAbajo() {
     if(posicionBueno<(celdas.length-filas.length)){ //Para la ultima fila restas el numero de celdas totales con la longitud de una fila
         //De manera que solo se mueve si Jaime no se encuentra en la ultima fila
         
-    celdas[posicionBueno].textContent = '-';
+        celdas[posicionBueno].textContent = '-';
 
-    posicionBueno = posicionBueno + filas.length;
-    celdas[posicionBueno].textContent = 'Robert';
+        posicionBueno = posicionBueno + filas.length;
+        celdas[posicionBueno].textContent = 'Robert';
+
+        filaBueno++;
+
+        apareceSalida();
+        win();
+        setTimeout(() => moverMalo(), 300);
     }
 
-    filaBueno++;
-    apareceSalida();
-    win();
-    moverMalo();
+
+    console.log("filabueno: " +filaBueno)
+    
 }
 
 function moverIzquierda() {
@@ -110,10 +128,16 @@ function moverIzquierda() {
         
         posicionBueno = posicionBueno - 1;
         celdas[posicionBueno].textContent = 'Robert';
+
+        apareceSalida();
+        win();
+        setTimeout(() => moverMalo(), 300);
+        
     }
-    apareceSalida();
-    win();
-    moverMalo();
+    
+
+    console.log("filabueno: " +filaBueno)
+    
 }
 
 
@@ -146,7 +170,10 @@ function moverMalo(){
             posicionMalo = posicionMalo + filas.length;
             celdas[posicionMalo].textContent = 'Jaime';
 
-            filaMalo++;
+            if(filaMalo!=7){
+                filaMalo++;
+            }
+            
         }
         //derecha
         else{
@@ -165,7 +192,10 @@ function moverMalo(){
             posicionMalo = posicionMalo - filas.length;
             celdas[posicionMalo].textContent = 'Jaime';
 
-            filaMalo--;
+            if(filaMalo!=0){
+                filaMalo--;
+            }
+            
         }
         //izquierda
         else{
@@ -182,8 +212,10 @@ function moverMalo(){
         location.reload();
     }
 
-    console.log("bueno "+posicionBueno);
-    console.log("malo "+posicionMalo);
+    //console.log("bueno "+posicionBueno);
+    //console.log("malo "+posicionMalo);
+
+    console.log("filamalo: "+filaMalo)
     
 }
 
