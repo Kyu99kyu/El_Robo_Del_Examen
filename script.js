@@ -1,10 +1,16 @@
-const celdas = document.getElementsByTagName('td');
-const filas = document.getElementsByTagName('tr');
+//const nceldas = document.getElementsByTagName('td');
+const nfilas = 8
+var tabla=document.getElementsByTagName("table")[0];
+var body=document.querySelector("body");
 const flechas = document.getElementsByClassName('flechas');
-var posicionBueno;
-var posicionMalo;
+var matriz=[[]];
+var posicionBuenox;
+var posicionBuenoy;
+var posicionMalox;
+var posicionMaloy;
 var nceldas;
-var examenes;
+var examenesx;
+var examenesy;
 var salida;
 var filaBueno=0; //Fila en la que se encuentra el bueno
 var filaMalo=-1; //Fila en la que se encuentra el malo
@@ -22,12 +28,152 @@ window.onload = ()=>{
     flechas[2].addEventListener('click', moverAbajo);
     flechas[1].addEventListener('click', moverIzquierda);
 
-    window.onkeyup=movimientoTeclas; //Para moverlo con las teclas tambien flama
+    //window.onkeyup=movimientoTeclas; //Para moverlo con las teclas tambien flama
+    
 
     
 }
 
+function apareceFlechas(){
+    for (let i = 0; i < flechas.length; i++) {
+        flechas[i].style.visibility = 'visible';
+    }
+}
 
+
+function crearMatriz(){
+    
+    for(let i=0;i<nfilas;i++){
+        matriz[i]=[];
+        for(let j=0;j<nfilas;j++){
+            matriz[i][j]=".";
+        }
+    }
+}
+
+function crearTabla(){
+    var tabla= document.createElement("table");
+    document.body.appendChild(tabla);
+
+    for(let i=0;i<nfilas;i++){
+        var fila=document.createElement("tr");
+        tabla.appendChild(fila);
+
+        for(let j=0;j<nfilas;j++){
+            var celda=document.createElement("td");
+            celda.textContent=matriz[i][j];
+            fila.appendChild(celda);
+        }
+    }
+}
+
+function comienzoJuego(){
+    jugar.disabled = 'true';
+
+    crearMatriz();
+    posicionBuenox=0;
+    posicionBuenoy=0;
+
+    matriz[posicionBuenox][posicionBuenoy]="Robert"; //Posicion del bueno
+
+    posicionMalox = Math.floor(Math.random() * (nfilas-1)) + 1; //Posicion del malo
+    posicionMaloy = Math.floor(Math.random() * (nfilas-1)) + 1; //Posicion del malo
+    matriz[posicionMalox][posicionMaloy]="Jaime";
+
+    do{
+        examenesx = Math.floor(Math.random() * (nfilas-1)) + 1; 
+        examenesy = Math.floor(Math.random() * (nfilas-1)) + 1; 
+    }
+    while(matriz[examenesx][examenesy]=="Jaime" || (examenesx==7 && examenesy==7));
+    matriz[examenesx][examenesy]="Examenes";
+
+    crearTabla();
+    apareceFlechas();
+    
+    
+
+}
+
+
+function moverArriba(){
+    if(posicionBuenox!=0){
+        matriz[posicionBuenox][posicionBuenoy]=".";
+        posicionBuenox--
+        matriz[posicionBuenox][posicionBuenoy]="Robert";
+
+        document.querySelector("body").removeChild(document.querySelector("body").lastChild); //Borrar tabla
+        //body.removeChild(body.lastChild); //Borrar tabla
+
+        apareceSalida()
+        crearTabla();
+        win();
+    }
+}
+
+function moverDerecha(){
+    if(posicionBuenoy!=7){
+        matriz[posicionBuenox][posicionBuenoy]=".";
+        posicionBuenoy++
+        matriz[posicionBuenox][posicionBuenoy]="Robert";
+
+        document.querySelector("body").removeChild(document.querySelector("body").lastChild); //Borrar tabla
+
+        apareceSalida()
+        crearTabla();  
+        win();
+        
+    }
+}
+
+function moverAbajo(){
+    if(posicionBuenox!=7){
+        matriz[posicionBuenox][posicionBuenoy]=".";
+        posicionBuenox++
+        matriz[posicionBuenox][posicionBuenoy]="Robert";
+
+        document.querySelector("body").removeChild(document.querySelector("body").lastChild); //Borrar tabla
+
+        apareceSalida()
+        crearTabla();
+        win();
+    }
+    
+}
+
+function moverIzquierda(){
+    if(posicionBuenoy!=0){
+        matriz[posicionBuenox][posicionBuenoy]=".";
+        posicionBuenoy--
+        matriz[posicionBuenox][posicionBuenoy]="Robert";
+
+        document.querySelector("body").removeChild(document.querySelector("body").lastChild); //Borrar tabla
+
+        apareceSalida()
+        crearTabla();
+        win();
+    }
+    
+}
+
+function apareceSalida(){
+
+    if(posicionBuenox==examenesx && posicionBuenoy==examenesy){
+        matriz[7][7]="Salida";
+    }
+
+}
+
+function win(){
+
+    if(posicionBuenox==7 && posicionBuenoy==7){
+        alert("Has ganao fiera");
+        location.reload(); //Empieza el juego de nuevo
+
+    }
+}
+
+
+/*
 function comienzoJuego() {    
     nceldas=celdas.length; //Numero de celdas
     posicionMalo = Math.floor(Math.random() * (nceldas-1)) + 1; //Posicion del malo
@@ -61,7 +207,9 @@ function comienzoJuego() {
     
 
 }
+*/
 
+/*
 function moverDerecha(){
 
     if((posicionBueno+1)%filas.length!=0){  //Solo se mueve si Robert no esta en una posicion que sea igual a un multiplo de la longitud de una fila (multiplos de 8)
@@ -273,5 +421,6 @@ function generarBloques(){
     }  
 }
 
+*/
 
 
