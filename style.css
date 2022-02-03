@@ -20,6 +20,7 @@ table td{
 
 .ladrillo{
     background-image: url("ladrillo.jpg");
+    font-size: 0;
 }
 
 .personaje{
@@ -31,7 +32,9 @@ table td{
 }
 
 .examenes{
-    background-image: url("examenes.jpg");
+    background-image: url("examenes.png");
+    font-size: 0;
+    background-repeat: no-repeat;
 }
 
 .flechas{

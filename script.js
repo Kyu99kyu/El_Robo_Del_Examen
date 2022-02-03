@@ -4,8 +4,8 @@ var tabla=document.getElementsByTagName("table")[0];
 var body=document.querySelector("body");
 const flechas = document.getElementsByClassName('flechas');
 var matriz=[[]];
-var posicionBuenox;
-var posicionBuenoy;
+var posicionBuenox=0;
+var posicionBuenoy=0;
 var posicionMalox;
 var posicionMaloy;
 var nceldas;
@@ -23,12 +23,6 @@ window.onload = ()=>{
     const jugar = document.getElementById('jugar');
     jugar.onclick = comienzoJuego;
     
-    
-    flechas[0].addEventListener('click', moverArriba);
-    flechas[3].addEventListener('click', moverDerecha);
-    flechas[2].addEventListener('click', moverAbajo);
-    flechas[1].addEventListener('click', moverIzquierda);
-
     window.onkeyup=movimientoTeclas; //Para moverlo con las teclas tambien flama
     
 }
@@ -80,6 +74,14 @@ function crearTabla(){
         for(let j=0;j<nfilas;j++){
             var celda=document.createElement("td");
             celda.textContent=matriz[i][j];
+
+            if(celda.textContent=="O"){ //Para que se mantengan los ladrillos
+                celda.className="ladrillo"
+            }
+            if(celda.textContent=="Examenes"){
+                celda.className="examenes"
+            }
+
             fila.appendChild(celda);
         }
     }
@@ -89,8 +91,6 @@ function comienzoJuego(){
     jugar.disabled = 'true';
 
     crearMatriz();
-    posicionBuenox=0;
-    posicionBuenoy=0;
 
     matriz[posicionBuenox][posicionBuenoy]="Robert"; //Posicion del bueno
 
@@ -105,14 +105,22 @@ function comienzoJuego(){
     while(matriz[examenesx][examenesy]=="Jaime" || (examenesx==7 && examenesy==7));
     matriz[examenesx][examenesy]="Examenes";
 
-
     
     crearTabla();
+    //movimientoResponsive();
+    celdas[(examenesx*nfilas)+examenesy].className="examenes"; //Colocar foto examenes
     generarBloques();
     apareceFlechas();
     
     
 
+}
+
+function movimientoResponsive(){
+    celdas[(posicionBuenox*nfilas)+posicionBuenoy+1].addEventListener('click', moverDerecha);
+    celdas[(posicionBuenox*nfilas)+posicionBuenoy+nfilas].addEventListener('click', moverAbajo);
+    celdas[(posicionBuenox*nfilas)+posicionBuenoy-1].addEventListener('click', moverIzquierda);
+    celdas[(posicionBuenox*nfilas)+posicionBuenoy-nfilas].addEventListener('click', moverArriba);
 }
 
 
