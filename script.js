@@ -105,6 +105,7 @@ function moverArriba(){
         //body.removeChild(body.lastChild); //Borrar tabla
 
         apareceSalida()
+        moverMalo();
         crearTabla();
         win();
     }
@@ -119,6 +120,7 @@ function moverDerecha(){
         document.querySelector("body").removeChild(document.querySelector("body").lastChild); //Borrar tabla
 
         apareceSalida()
+        moverMalo();
         crearTabla();  
         win();
         
@@ -134,6 +136,7 @@ function moverAbajo(){
         document.querySelector("body").removeChild(document.querySelector("body").lastChild); //Borrar tabla
 
         apareceSalida()
+        moverMalo();
         crearTabla();
         win();
     }
@@ -149,6 +152,7 @@ function moverIzquierda(){
         document.querySelector("body").removeChild(document.querySelector("body").lastChild); //Borrar tabla
 
         apareceSalida()
+        moverMalo();
         crearTabla();
         win();
     }
@@ -165,10 +169,96 @@ function apareceSalida(){
 
 function win(){
 
-    if(posicionBuenox==7 && posicionBuenoy==7){
+    if(posicionBuenox==7 && posicionBuenoy==7 && matriz[examenesx][examenesy]!="Examenes"){
         alert("Has ganao fiera");
         location.reload(); //Empieza el juego de nuevo
 
+    }
+}
+
+function moverMalo(){
+    //Se mueve en el eje x
+    if(Math.abs(posicionBuenox-posicionMalox)<Math.abs(posicionBuenoy-posicionMaloy)){
+        //izquierda
+        if(posicionBuenoy<posicionMaloy){
+            if(posicionMaloy!=0){
+                matriz[posicionMalox][posicionMaloy]=".";
+                posicionMaloy--
+                matriz[posicionMalox][posicionMaloy]="Jaime";
+            }
+        }
+        //Derecha
+        else if(posicionBuenoy>posicionMaloy){
+            if(posicionMaloy!=7){
+                matriz[posicionMalox][posicionMaloy]=".";
+                posicionMaloy++
+                matriz[posicionMalox][posicionMaloy]="Jaime";
+            }
+        }
+    }
+    //Se mueve eje y
+    else if(Math.abs(posicionBuenox-posicionMalox)>Math.abs(posicionBuenoy-posicionMaloy)){
+        //arriba
+        if(posicionBuenox<posicionMalox){
+            if(posicionMalox!=0){
+                matriz[posicionMalox][posicionMaloy]=".";
+                posicionMalox--
+                matriz[posicionMalox][posicionMaloy]="Jaime";
+            }
+        }
+        //abajo
+        else if(posicionBuenox>posicionMalox){
+            if(posicionMalox!=7){
+                matriz[posicionMalox][posicionMaloy]=".";
+                posicionMalox++
+                matriz[posicionMalox][posicionMaloy]="Jaime";
+            }
+        }
+    }
+    //Por si la distancia entre x e y es =, hace un random pal eje x o el eje y
+    else{
+        var opcion=Math.floor(Math.random() * 1);
+        if (opcion == 0){
+            //arriba
+            if(posicionBuenox<posicionMalox){
+                if(posicionMalox!=0){
+                    matriz[posicionMalox][posicionMaloy]=".";
+                    posicionMalox--
+                    matriz[posicionMalox][posicionMaloy]="Jaime";
+                }
+            }
+            //abajo
+            else if(posicionBuenox>posicionMalox){
+                if(posicionMalox!=7){
+                    matriz[posicionMalox][posicionMaloy]=".";
+                    posicionMalox++
+                    matriz[posicionMalox][posicionMaloy]="Jaime";
+                }
+            }
+        }
+        else{
+            //izquierda
+            if(posicionBuenoy<posicionMaloy){
+                if(posicionMaloy!=0){
+                    matriz[posicionMalox][posicionMaloy]=".";
+                    posicionMaloy--
+                    matriz[posicionMalox][posicionMaloy]="Jaime";
+                }
+            }
+            //Derecha
+            else if(posicionBuenoy>posicionMaloy){
+                if(posicionMaloy!=7){
+                    matriz[posicionMalox][posicionMaloy]=".";
+                    posicionMaloy++
+                    matriz[posicionMalox][posicionMaloy]="Jaime";
+                }
+            }
+        }
+    }
+
+    if(posicionMalox==posicionBuenox && posicionMaloy==posicionBuenoy){
+        alert("Has perdio makina");
+        location.reload();
     }
 }
 
