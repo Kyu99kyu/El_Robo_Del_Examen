@@ -1,4 +1,4 @@
-//const nceldas = document.getElementsByTagName('td');
+var celdas = document.getElementsByTagName('td');
 const nfilas = 8
 var tabla=document.getElementsByTagName("table")[0];
 var body=document.querySelector("body");
@@ -105,8 +105,10 @@ function comienzoJuego(){
     while(matriz[examenesx][examenesy]=="Jaime" || (examenesx==7 && examenesy==7));
     matriz[examenesx][examenesy]="Examenes";
 
-    generarBloques();
+
+    
     crearTabla();
+    generarBloques();
     apareceFlechas();
     
     
@@ -208,15 +210,15 @@ function moverMalo(){
                 moverMaloArriba();
                 
             }
-            else if(posicionMaloy!=7 && matriz[posicionMalox][posicionMaloy+1]!="O"){
-                moverMaloDerecha();
-                
-            }
-            
             else if(posicionMalox!=7 && matriz[posicionMalox+1][posicionMaloy]!="O"){
                 moverMaloAbajo();
                 
             }
+            else if(posicionMaloy!=7 && matriz[posicionMalox][posicionMaloy+1]!="O"){
+                moverMaloDerecha();
+                
+            }
+        
 
         }
         //Derecha
@@ -229,14 +231,15 @@ function moverMalo(){
                 moverMaloAbajo();
                 
             }
-            else if(posicionMaloy!=0 && matriz[posicionMalox][posicionMaloy-1]!="O"){
-                moverMaloIzquierda();
-                
-            }
             else if(posicionMalox!=0 && matriz[posicionMalox-1][posicionMaloy]!="O"){
                 moverMaloArriba();
                 
             }
+            else if(posicionMaloy!=0 && matriz[posicionMalox][posicionMaloy-1]!="O"){
+                moverMaloIzquierda();
+                
+            }
+            
             
 
         }
@@ -253,14 +256,15 @@ function moverMalo(){
                 moverMaloIzquierda();
                 
             }
-            else if(posicionMalox!=7 && matriz[posicionMalox+1][posicionMaloy]!="O"){
-                moverMaloAbajo();
-                
-            }
             else if(posicionMaloy!=7 && matriz[posicionMalox][posicionMaloy+1]!="O"){
                 moverMaloDerecha();
                 
             }
+            else if(posicionMalox!=7 && matriz[posicionMalox+1][posicionMaloy]!="O"){
+                moverMaloAbajo();
+                
+            }
+            
             
 
         }
@@ -274,14 +278,15 @@ function moverMalo(){
                 moverMaloDerecha();
                 
             }
-            else if(posicionMalox!=0 && matriz[posicionMalox-1][posicionMaloy]!="O"){
-                moverMaloArriba();
-                
-            }
             else if(posicionMaloy!=0 && matriz[posicionMalox][posicionMaloy-1]!="O"){
                 moverMaloIzquierda();
                 
             }
+            else if(posicionMalox!=0 && matriz[posicionMalox-1][posicionMaloy]!="O"){
+                moverMaloArriba();
+                
+            }
+            
 
         }
     }
@@ -299,14 +304,15 @@ function moverMalo(){
                     moverMaloIzquierda();
                     
                 }
-                else if(posicionMalox!=7 && matriz[posicionMalox+1][posicionMaloy]!="O"){
-                    moverMaloAbajo();
-                    
-                }
                 else if(posicionMaloy!=7 && matriz[posicionMalox][posicionMaloy+1]!="O"){
                     moverMaloDerecha();
                     
                 }
+                else if(posicionMalox!=7 && matriz[posicionMalox+1][posicionMaloy]!="O"){
+                    moverMaloAbajo();
+                    
+                }
+                
                 
 
             }
@@ -320,15 +326,15 @@ function moverMalo(){
                     moverMaloDerecha();
                     
                 }
+                else if(posicionMaloy!=0 && matriz[posicionMalox][posicionMaloy-1]!="O"){
+                    moverMaloIzquierda();
+                    
+                }
                 else if(posicionMalox!=0 && matriz[posicionMalox-1][posicionMaloy]!="O"){
                     moverMaloArriba();
                     
                 }
                 
-                else if(posicionMaloy!=0 && matriz[posicionMalox][posicionMaloy-1]!="O"){
-                    moverMaloIzquierda();
-                    
-                }
 
             }
         }
@@ -343,15 +349,15 @@ function moverMalo(){
                     moverMaloArriba();
                     
                 }
+                else if(posicionMalox!=7 && matriz[posicionMalox+1][posicionMaloy]!="O"){
+                    moverMaloAbajo();
+                    
+                }
                 else if(posicionMaloy!=7 && matriz[posicionMalox][posicionMaloy+1]!="O"){
                     moverMaloDerecha();
                     
                 }
                 
-                else if(posicionMalox!=7 && matriz[posicionMalox+1][posicionMaloy]!="O"){
-                    moverMaloAbajo();
-                    
-                }
 
             }
             //Derecha
@@ -364,14 +370,15 @@ function moverMalo(){
                     moverMaloAbajo();
                     
                 }
-                else if(posicionMaloy!=0 && matriz[posicionMalox][posicionMaloy-1]!="O"){
-                    moverMaloIzquierda();
-                    
-                }
                 else if(posicionMalox!=0 && matriz[posicionMalox-1][posicionMaloy]!="O"){
                     moverMaloArriba();
                     
                 }
+                else if(posicionMaloy!=0 && matriz[posicionMalox][posicionMaloy-1]!="O"){
+                    moverMaloIzquierda();
+                    
+                }
+                
                 
 
             }
@@ -416,11 +423,12 @@ function moverMaloAbajo(){
 function generarBloques(){
 
     for(let i=0;i<15;i++){
-        paredx = Math.floor(Math.random() * (8-1)) + 1;
-        paredy = Math.floor(Math.random() * (8-1)) + 1;
+        paredx = Math.floor(Math.random() * (8-1));
+        paredy = Math.floor(Math.random() * (8-1));
 
-        if((posicionMalox!=paredx && posicionMaloy!=paredy) && (examenesx!=paredx || examenesy!=paredy) && (paredx!=7 && paredy!=7)){
+        if((posicionMalox!=paredx && posicionMaloy!=paredy) && (examenesx!=paredx || examenesy!=paredy) && (paredx!=7 && paredy!=7) && (paredx!=0 || paredy!=0) && (paredx!=0 && paredy!=1)){
             matriz[paredx][paredy]="O";
+            celdas[(paredx*nfilas)+paredy].className="ladrillo"
 
         }
         else{
