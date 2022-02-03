@@ -15,7 +15,8 @@ var salida;
 var filaBueno=0; //Fila en la que se encuentra el bueno
 var filaMalo=-1; //Fila en la que se encuentra el malo
 var cont=0; //contador para saber en que fila estoy (se utiliza en el metodo comprobarFilaMalo())
-var pared;
+var paredx;
+var paredy;
 
 
 window.onload = ()=>{    
@@ -28,10 +29,27 @@ window.onload = ()=>{
     flechas[2].addEventListener('click', moverAbajo);
     flechas[1].addEventListener('click', moverIzquierda);
 
-    //window.onkeyup=movimientoTeclas; //Para moverlo con las teclas tambien flama
+    window.onkeyup=movimientoTeclas; //Para moverlo con las teclas tambien flama
     
+}
 
-    
+function movimientoTeclas(event){
+	if(event.keyCode == '39'){//derecha
+		moverDerecha();
+	}
+
+	if(event.keyCode == '37'){//Izquierda
+		moverIzquierda();
+	}
+	
+	if(event.keyCode == '38'){//arriba
+		moverArriba();
+	}
+
+	if(event.keyCode == '40'){//abajo
+		moverAbajo();
+	}
+
 }
 
 function apareceFlechas(){
@@ -87,6 +105,7 @@ function comienzoJuego(){
     while(matriz[examenesx][examenesy]=="Jaime" || (examenesx==7 && examenesy==7));
     matriz[examenesx][examenesy]="Examenes";
 
+    generarBloques();
     crearTabla();
     apareceFlechas();
     
@@ -260,6 +279,23 @@ function moverMalo(){
         alert("Has perdio makina");
         location.reload();
     }
+}
+
+function generarBloques(){
+
+    for(let i=0;i<15;i++){
+        paredx = Math.floor(Math.random() * (8-1)) + 1;
+        paredy = Math.floor(Math.random() * (8-1)) + 1;
+
+        if((posicionMalox!=paredx && posicionMaloy!=paredy) && (examenesx!=paredx || examenesy!=paredy) && (paredx!=7 && paredy!=7)){
+            matriz[paredx][paredy]="O";
+
+        }
+        else{
+            i--
+        }
+        
+    }  
 }
 
 
