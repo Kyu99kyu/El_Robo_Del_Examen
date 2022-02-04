@@ -1,11 +1,11 @@
-//const nceldas = document.getElementsByTagName('td');
+var celdas = document.getElementsByTagName('td');
 const nfilas = 8
 var tabla=document.getElementsByTagName("table")[0];
 var body=document.querySelector("body");
 const flechas = document.getElementsByClassName('flechas');
 var matriz=[[]];
-var posicionBuenox;
-var posicionBuenoy;
+var posicionBuenox=0;
+var posicionBuenoy=0;
 var posicionMalox;
 var posicionMaloy;
 var nceldas;
@@ -23,12 +23,6 @@ window.onload = ()=>{
     const jugar = document.getElementById('jugar');
     jugar.onclick = comienzoJuego;
     
-    
-    flechas[0].addEventListener('click', moverArriba);
-    flechas[3].addEventListener('click', moverDerecha);
-    flechas[2].addEventListener('click', moverAbajo);
-    flechas[1].addEventListener('click', moverIzquierda);
-
     window.onkeyup=movimientoTeclas; //Para moverlo con las teclas tambien flama
     
 }
@@ -80,6 +74,14 @@ function crearTabla(){
         for(let j=0;j<nfilas;j++){
             var celda=document.createElement("td");
             celda.textContent=matriz[i][j];
+
+            if(celda.textContent=="O"){ //Para que se mantengan los ladrillos
+                celda.className="ladrillo"
+            }
+            if(celda.textContent=="Examenes"){
+                celda.className="examenes"
+            }
+
             fila.appendChild(celda);
         }
     }
@@ -89,8 +91,6 @@ function comienzoJuego(){
     jugar.disabled = 'true';
 
     crearMatriz();
-    posicionBuenox=0;
-    posicionBuenoy=0;
 
     matriz[posicionBuenox][posicionBuenoy]="Robert"; //Posicion del bueno
 
@@ -105,12 +105,22 @@ function comienzoJuego(){
     while(matriz[examenesx][examenesy]=="Jaime" || (examenesx==7 && examenesy==7));
     matriz[examenesx][examenesy]="Examenes";
 
-    generarBloques();
+    
     crearTabla();
+    //movimientoResponsive();
+    celdas[(examenesx*nfilas)+examenesy].className="examenes"; //Colocar foto examenes
+    generarBloques();
     apareceFlechas();
     
     
 
+}
+
+function movimientoResponsive(){
+    celdas[(posicionBuenox*nfilas)+posicionBuenoy+1].addEventListener('click', moverDerecha);
+    celdas[(posicionBuenox*nfilas)+posicionBuenoy+nfilas].addEventListener('click', moverAbajo);
+    celdas[(posicionBuenox*nfilas)+posicionBuenoy-1].addEventListener('click', moverIzquierda);
+    celdas[(posicionBuenox*nfilas)+posicionBuenoy-nfilas].addEventListener('click', moverArriba);
 }
 
 
@@ -216,8 +226,7 @@ function moverMalo(){
                 moverMaloDerecha();
                 
             }
-            
-            
+        
 
         }
         //Derecha
@@ -263,6 +272,7 @@ function moverMalo(){
                 moverMaloAbajo();
                 
             }
+            
             
 
         }
@@ -333,7 +343,6 @@ function moverMalo(){
                     
                 }
                 
-                
 
             }
         }
@@ -357,7 +366,6 @@ function moverMalo(){
                     
                 }
                 
-                
 
             }
             //Derecha
@@ -378,6 +386,7 @@ function moverMalo(){
                     moverMaloIzquierda();
                     
                 }
+                
                 
 
             }
@@ -422,11 +431,12 @@ function moverMaloAbajo(){
 function generarBloques(){
 
     for(let i=0;i<15;i++){
-        paredx = Math.floor(Math.random() * (8-1)) + 1;
-        paredy = Math.floor(Math.random() * (8-1)) + 1;
+        paredx = Math.floor(Math.random() * (8-1));
+        paredy = Math.floor(Math.random() * (8-1));
 
-        if((posicionMalox!=paredx && posicionMaloy!=paredy) && (examenesx!=paredx || examenesy!=paredy) && (paredx!=7 && paredy!=7)){
+        if((posicionMalox!=paredx && posicionMaloy!=paredy) && (examenesx!=paredx || examenesy!=paredy) && (paredx!=7 && paredy!=7) && (paredx!=0 || paredy!=0) && (paredx!=0 && paredy!=1)){
             matriz[paredx][paredy]="O";
+            celdas[(paredx*nfilas)+paredy].className="ladrillo"
 
         }
         else{

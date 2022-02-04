@@ -8,13 +8,32 @@ table{
     height: 500px;
     border: 2px solid black;
     margin: auto;
+    background-image: url("cesped.jpg");
 }
 
 table td{
     min-width: 70px;
     height: 70px;
-    border: 1px solid blue;
     text-align: center;
+}
+
+.ladrillo{
+    background-image: url("ladrillo.jpg");
+    font-size: 0;
+}
+
+.personaje{
+    background-image: url("personaje.jpg");
+}
+
+.malo{
+    background-image: url("malo.png");
+}
+
+.examenes{
+    background-image: url("examenes.png");
+    font-size: 0;
+    background-repeat: no-repeat;
 }
 
 .flechas{
