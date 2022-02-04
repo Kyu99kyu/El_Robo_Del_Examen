@@ -1,4 +1,6 @@
 var celdas = document.getElementsByTagName('td');
+var cogerExamen=false; //Indica si se ha cogido el examen o no
+var cogerSalida=false; //Indica si se ha cogido la salida o no
 const nfilas = 8
 var tabla=document.getElementsByTagName("table")[0];
 var body=document.querySelector("body");
@@ -12,9 +14,6 @@ var nceldas;
 var examenesx;
 var examenesy;
 var salida;
-var filaBueno=0; //Fila en la que se encuentra el bueno
-var filaMalo=-1; //Fila en la que se encuentra el malo
-var cont=0; //contador para saber en que fila estoy (se utiliza en el metodo comprobarFilaMalo())
 var paredx;
 var paredy;
 
@@ -78,9 +77,10 @@ function crearTabla(){
             if(celda.textContent=="O"){ //Para que se mantengan los ladrillos
                 celda.className="ladrillo"
             }
-            if(celda.textContent=="Examenes"){
-                celda.className="examenes"
-            }
+            else if(celda.textContent=="Examenes") celda.className="examenes";
+            else if(celda.textContent=="Jaime") celda.className="malo";
+            else if(celda.textContent=="Robert") celda.className="personaje";
+            else if(celda.textContent=="Salida") celda.className="salida";
 
             fila.appendChild(celda);
         }
@@ -108,7 +108,6 @@ function comienzoJuego(){
     
     crearTabla();
     //movimientoResponsive();
-    celdas[(examenesx*nfilas)+examenesy].className="examenes"; //Colocar foto examenes
     generarBloques();
     apareceFlechas();
     
@@ -192,6 +191,8 @@ function apareceSalida(){
 
     if(posicionBuenox==examenesx && posicionBuenoy==examenesy){
         matriz[7][7]="Salida";
+        cogerExamen=true; //El prota ha cogido el examen
+        cogerSalida=true;
     }
 
 }
@@ -392,7 +393,16 @@ function moverMalo(){
             }
         }
     }
+    
+    //Para que el malo no se coma el examen
+    if(posicionMalox==examenesx && posicionMaloy==examenesy && !cogerExamen){
+        matriz[posicionMalox][posicionMaloy]="Examenes";
+    }
 
+    //Para que el malo no se coma la salida
+    if(posicionMalox==nfilas-1 && posicionMaloy==nfilas-1 && cogerSalida) matriz[posicionMalox][posicionMaloy]="Salida";
+
+    //Cuando pierdes
     if(posicionMalox==posicionBuenox && posicionMaloy==posicionBuenoy){
         alert("Has perdio makina");
         location.reload();
@@ -400,21 +410,21 @@ function moverMalo(){
 }
 
 function moverMaloDerecha(){
-        matriz[posicionMalox][posicionMaloy]=".";
+    if(matriz[posicionMalox][posicionMaloy]!="Examenes" && matriz[posicionMalox][posicionMaloy]!="Salida") matriz[posicionMalox][posicionMaloy]=".";
         posicionMaloy++
         matriz[posicionMalox][posicionMaloy]="Jaime";
         
 }
 
 function moverMaloIzquierda(){
-        matriz[posicionMalox][posicionMaloy]=".";
+    if(matriz[posicionMalox][posicionMaloy]!="Examenes" && matriz[posicionMalox][posicionMaloy]!="Salida") matriz[posicionMalox][posicionMaloy]=".";
         posicionMaloy--;
         matriz[posicionMalox][posicionMaloy]="Jaime";
         
 }
 
 function moverMaloArriba(){
-        matriz[posicionMalox][posicionMaloy]=".";
+    if(matriz[posicionMalox][posicionMaloy]!="Examenes" && matriz[posicionMalox][posicionMaloy]!="Salida") matriz[posicionMalox][posicionMaloy]=".";
         posicionMalox--
         matriz[posicionMalox][posicionMaloy]="Jaime";
         
@@ -422,7 +432,7 @@ function moverMaloArriba(){
 }
 
 function moverMaloAbajo(){
-        matriz[posicionMalox][posicionMaloy]=".";
+    if(matriz[posicionMalox][posicionMaloy]!="Examenes" && matriz[posicionMalox][posicionMaloy]!="Salida") matriz[posicionMalox][posicionMaloy]=".";
         posicionMalox++
         matriz[posicionMalox][posicionMaloy]="Jaime";
         

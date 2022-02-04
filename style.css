@@ -19,7 +19,6 @@ table td{
 
 .ladrillo{
     background-image: url("ladrillo.jpg");
-    font-size: 0;
 }
 
 .personaje{
@@ -33,6 +32,11 @@ table td{
 .examenes{
     background-image: url("examenes.png");
     font-size: 0;
+    background-repeat: no-repeat;
+}
+
+.salida{
+    background-image: url("salida\ \(1\).png");
     background-repeat: no-repeat;
 }
 
