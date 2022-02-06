@@ -3,40 +3,49 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 table{
     width: 500px;
     height: 500px;
     border: 2px solid black;
-    margin: auto;
-    background-image: url("cesped.jpg");
+    background-image: url("../fotos/cesped.jpg");
+    margin-top: 10em;
 }
 
 table td{
     min-width: 70px;
     height: 70px;
     text-align: center;
+    font-size: 0;
 }
 
 .ladrillo{
-    background-image: url("ladrillo.jpg");
+    background-image: url("../fotos/ladrillo.jpg");
 }
 
 .personaje{
-    background-image: url("personaje.jpg");
+    background-image: url("../fotos/personaje.jpg");
 }
 
 .malo{
-    background-image: url("malo.png");
+    background-image: url("../fotos/malo.png");
 }
 
 .examenes{
-    background-image: url("examenes.png");
+    background-image: url("../fotos/examenes.png");
     font-size: 0;
     background-repeat: no-repeat;
 }
 
 .salida{
-    background-image: url("salida\ \(1\).png");
+    background-image: url("../fotos/salida.png");
     background-repeat: no-repeat;
 }
 
@@ -51,3 +60,7 @@ table td{
 .flechas:hover{
     background-color: rgb(255, 197, 122);
 }
+
+
+
+
