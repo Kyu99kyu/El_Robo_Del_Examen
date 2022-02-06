@@ -10,7 +10,7 @@ body{
     flex-direction: column;
     align-items: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    
+    background-image: url("https://thumbs.gfycat.com/FarOldElephantbeetle-max-1mb.gif");    
 }
 
 #div_reglas{
@@ -27,8 +27,42 @@ body{
     font-size: large;
 }
 
+
 button{
     display: flex;
     justify-content: center ;
     width: 20%;
+    height: 70px;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+	float:left;
+	border: #fbfbfb solid 4px;
+	cursor:pointer;
+	background-color: #3498db;
+	color:white;
+	font-size:24px;
+	padding-top:18px;
+	padding-bottom:22px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+ 	 margin-top:-4px;
+  	font-weight:700;
+    border-radius: 25px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 25px;
+}
+
+button:hover{
+	background-color: rgba(0,0,0,0);
+	color: #0493bd;
+    border: 1px solid #0493bd;
+}
+
+p{
+    margin: 10px;
+}
+
+h1{
+    margin: 10px;
 }

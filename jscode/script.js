@@ -234,202 +234,7 @@ function win(){
     }
 }
 
-function moverMalo(){
-    //Se mueve en el eje x
-    if(Math.abs(posicionBuenox-posicionMalox)<Math.abs(posicionBuenoy-posicionMaloy)){
-        //izquierda
-        if(posicionBuenoy<posicionMaloy){
-            if(matriz[posicionMalox][posicionMaloy-1]!="O"){
-                moverMaloIzquierda();
-                
-            }
-            else if(matriz[posicionMalox-1][posicionMaloy]!="O"){
-                moverMaloArriba();
-                
-            }
-            else if(matriz[posicionMalox+1][posicionMaloy]!="O"){
-                moverMaloAbajo();
-                
-            }
-            else if(matriz[posicionMalox][posicionMaloy+1]!="O"){
-                moverMaloDerecha();
-                
-            }
-        
-
-        }
-        //Derecha
-        else if(posicionBuenoy>posicionMaloy){
-            if(matriz[posicionMalox][posicionMaloy+1]!="O"){
-                moverMaloDerecha();
-                
-            }
-            else if(matriz[posicionMalox+1][posicionMaloy]!="O"){
-                moverMaloAbajo();
-                
-            }
-            else if(matriz[posicionMalox-1][posicionMaloy]!="O"){
-                moverMaloArriba();
-                
-            }
-            else if(matriz[posicionMalox][posicionMaloy-1]!="O"){
-                moverMaloIzquierda();
-                
-            }
-            
-            
-
-        }
-    }
-    //Se mueve eje y
-    else if(Math.abs(posicionBuenox-posicionMalox)>Math.abs(posicionBuenoy-posicionMaloy)){
-        //arriba
-        if(posicionBuenox<posicionMalox){
-            if(matriz[posicionMalox-1][posicionMaloy]!="O"){
-                moverMaloArriba();
-                
-            }
-            else if( matriz[posicionMalox][posicionMaloy-1]!="O"){
-                moverMaloIzquierda();
-                
-            }
-            else if(matriz[posicionMalox][posicionMaloy+1]!="O"){
-                moverMaloDerecha();
-                
-            }
-            else if(matriz[posicionMalox+1][posicionMaloy]!="O"){
-                moverMaloAbajo();
-                
-            }
-            
-            
-
-        }
-        //abajo
-        else if(posicionBuenox>posicionMalox){
-            if(matriz[posicionMalox+1][posicionMaloy]!="O"){
-                moverMaloAbajo();
-                
-            }
-            else if(matriz[posicionMalox][posicionMaloy+1]!="O"){
-                moverMaloDerecha();
-                
-            }
-            else if(matriz[posicionMalox][posicionMaloy-1]!="O"){
-                moverMaloIzquierda();
-                
-            }
-            else if(matriz[posicionMalox-1][posicionMaloy]!="O"){
-                moverMaloArriba();
-                
-            }
-            
-
-        }
-    }
-    //Por si la distancia entre x e y es =, hace un random pal eje x o el eje y
-    else{
-        var opcion=Math.floor(Math.random() * 1);
-        if (opcion == 0){
-            //arriba
-            if(posicionBuenox<posicionMalox){
-                if(matriz[posicionMalox-1][posicionMaloy]!="O"){
-                    moverMaloArriba();
-                    
-                }
-                else if(matriz[posicionMalox][posicionMaloy-1]!="O"){
-                    moverMaloIzquierda();
-                    
-                }
-                else if(matriz[posicionMalox][posicionMaloy+1]!="O"){
-                    moverMaloDerecha();
-                    
-                }
-                else if(matriz[posicionMalox+1][posicionMaloy]!="O"){
-                    moverMaloAbajo();
-                    
-                }
-                
-                
-
-            }
-            //abajo
-            else if(posicionBuenox>posicionMalox){
-                if(matriz[posicionMalox+1][posicionMaloy]!="O"){
-                    moverMaloAbajo();
-                    
-                }
-                else if(matriz[posicionMalox][posicionMaloy+1]!="O"){
-                    moverMaloDerecha();
-                    
-                }
-                else if(matriz[posicionMalox][posicionMaloy-1]!="O"){
-                    moverMaloIzquierda();
-                    
-                }
-                else if(matriz[posicionMalox-1][posicionMaloy]!="O"){
-                    moverMaloArriba();
-                    
-                }
-                
-
-            }
-        }
-        else{
-            //izquierda
-            if(posicionBuenoy<posicionMaloy){
-                if(matriz[posicionMalox][posicionMaloy-1]!="O"){
-                    moverMaloIzquierda();
-                    
-                }
-                else if(matriz[posicionMalox-1][posicionMaloy]!="O"){
-                    moverMaloArriba();
-                    
-                }
-                else if(matriz[posicionMalox+1][posicionMaloy]!="O"){
-                    moverMaloAbajo();
-                    
-                }
-                else if(matriz[posicionMalox][posicionMaloy+1]!="O"){
-                    moverMaloDerecha();
-                    
-                }
-                
-
-            }
-            //Derecha
-            else if(posicionBuenoy>posicionMaloy){
-                if(matriz[posicionMalox][posicionMaloy+1]!="O"){
-                    moverMaloDerecha();
-                    
-                }
-                else if(matriz[posicionMalox+1][posicionMaloy]!="O"){
-                    moverMaloAbajo();
-                    
-                }
-                else if(matriz[posicionMalox-1][posicionMaloy]!="O"){
-                    moverMaloArriba();
-                    
-                }
-                else if(matriz[posicionMalox][posicionMaloy-1]!="O"){
-                    moverMaloIzquierda();
-                    
-                }
-                
-                
-
-            }
-        }
-    }
-    
-    //Para que el malo no se coma el examen
-    if(posicionMalox==examenesx && posicionMaloy==examenesy && !cogerExamen){
-        matriz[posicionMalox][posicionMaloy]="Examenes";
-    }
-
-    //Para que el malo no se coma la salida
-    if(posicionMalox==nfilas-1 && posicionMaloy==nfilas-1 && cogerSalida) matriz[posicionMalox][posicionMaloy]="Salida";
-
+function loose(){
     //Cuando pierdes
     if(posicionMalox==posicionBuenox && posicionMaloy==posicionBuenoy){
         var div=document.createElement("div");
@@ -455,6 +260,90 @@ function moverMalo(){
             location.reload();
         }
     }
+}
+
+function moverMalo(){
+    //Se mueve en el eje x
+    if(Math.abs(posicionBuenox-posicionMalox)<Math.abs(posicionBuenoy-posicionMaloy)){
+        //izquierda
+        if(posicionBuenoy<posicionMaloy){
+            if(matriz[posicionMalox][posicionMaloy-1]!="O") moverMaloIzquierda();
+                
+            else if(matriz[posicionMalox-1][posicionMaloy]!="O") moverMaloArriba();
+            else if(matriz[posicionMalox+1][posicionMaloy]!="O") moverMaloAbajo();
+            else if(matriz[posicionMalox][posicionMaloy+1]!="O") moverMaloDerecha();
+        }
+        //Derecha
+        else if(posicionBuenoy>posicionMaloy){
+            if(matriz[posicionMalox][posicionMaloy+1]!="O") moverMaloDerecha();
+            else if(matriz[posicionMalox+1][posicionMaloy]!="O") moverMaloAbajo();
+            else if(matriz[posicionMalox-1][posicionMaloy]!="O") moverMaloArriba();
+            else if(matriz[posicionMalox][posicionMaloy-1]!="O") moverMaloIzquierda();
+        }
+    }
+    //Se mueve eje y
+    else if(Math.abs(posicionBuenox-posicionMalox)>Math.abs(posicionBuenoy-posicionMaloy)){
+        //arriba
+        if(posicionBuenox<posicionMalox){
+            if(matriz[posicionMalox-1][posicionMaloy]!="O") moverMaloArriba();
+            else if( matriz[posicionMalox][posicionMaloy-1]!="O") moverMaloIzquierda();
+            else if(matriz[posicionMalox][posicionMaloy+1]!="O") moverMaloDerecha();
+            else if(matriz[posicionMalox+1][posicionMaloy]!="O") moverMaloAbajo();
+        }
+        //abajo
+        else if(posicionBuenox>posicionMalox){
+            if(matriz[posicionMalox+1][posicionMaloy]!="O") moverMaloAbajo();
+            else if(matriz[posicionMalox][posicionMaloy+1]!="O") moverMaloDerecha();
+            else if(matriz[posicionMalox][posicionMaloy-1]!="O") moverMaloIzquierda();
+            else if(matriz[posicionMalox-1][posicionMaloy]!="O") moverMaloArriba();
+        }
+    }
+    //Por si la distancia entre x e y es =, hace un random pal eje x o el eje y
+    else{
+        var opcion=Math.floor(Math.random() * 1);
+        if (opcion == 0){
+            //arriba
+            if(posicionBuenox<posicionMalox){
+                if(matriz[posicionMalox-1][posicionMaloy]!="O") moverMaloArriba();
+                else if(matriz[posicionMalox][posicionMaloy-1]!="O") moverMaloIzquierda();
+                else if(matriz[posicionMalox][posicionMaloy+1]!="O") moverMaloDerecha();
+                else if(matriz[posicionMalox+1][posicionMaloy]!="O") moverMaloAbajo();
+            }
+            //abajo
+            else if(posicionBuenox>posicionMalox){
+                if(matriz[posicionMalox+1][posicionMaloy]!="O") moverMaloAbajo();
+                else if(matriz[posicionMalox][posicionMaloy+1]!="O") moverMaloDerecha();
+                else if(matriz[posicionMalox][posicionMaloy-1]!="O") moverMaloIzquierda();
+                else if(matriz[posicionMalox-1][posicionMaloy]!="O") moverMaloArriba();
+            }
+        }
+        else{
+            //izquierda
+            if(posicionBuenoy<posicionMaloy){
+                if(matriz[posicionMalox][posicionMaloy-1]!="O") moverMaloIzquierda();
+                else if(matriz[posicionMalox-1][posicionMaloy]!="O") moverMaloArriba();
+                else if(matriz[posicionMalox+1][posicionMaloy]!="O") moverMaloAbajo(); 
+                else if(matriz[posicionMalox][posicionMaloy+1]!="O") moverMaloDerecha();
+            }
+            //Derecha
+            else if(posicionBuenoy>posicionMaloy){
+                if(matriz[posicionMalox][posicionMaloy+1]!="O") moverMaloDerecha();
+                else if(matriz[posicionMalox+1][posicionMaloy]!="O") moverMaloAbajo();
+                else if(matriz[posicionMalox-1][posicionMaloy]!="O") moverMaloArriba();
+                else if(matriz[posicionMalox][posicionMaloy-1]!="O") moverMaloIzquierda();
+            }
+        }
+    }
+    
+    //Para que el malo no se coma el examen
+    if(posicionMalox==examenesx && posicionMaloy==examenesy && !cogerExamen){
+        matriz[posicionMalox][posicionMaloy]="Examenes";
+    }
+
+    //Para que el malo no se coma la salida
+    if(posicionMalox==nfilas-1 && posicionMaloy==nfilas-1 && cogerSalida) matriz[posicionMalox][posicionMaloy]="Salida";
+
+    loose();
 }
 
 function moverMaloDerecha(){

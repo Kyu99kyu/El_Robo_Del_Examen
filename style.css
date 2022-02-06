@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+table{
+    width: 500px;
+    height: 500px;
+    border: 2px solid black;
+    margin: auto;
+}
+
+table td{
+    min-width: 70px;
+    height: 70px;
+    border: 1px solid blue;
+    text-align: center;
+}
+
+.flechas{
+    width: 70px;
+    height: 70px;
+    border: 1px solid black;
+    background-color: burlywood;
+    visibility: hidden;
+}
+
+.flechas:hover{
+    background-color: rgb(255, 197, 122);
+}
